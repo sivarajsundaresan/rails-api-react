@@ -6,7 +6,8 @@ class Api::PostsController < ApplicationController
 	end
 	
 	def create
-		@post = Post.new(params)
+		params["post"] = {name: "post3", description: "description3"}
+		@post = Post.new(post_params)
 
 		if @post.save
 			render json: { status: true }, status: :ok
@@ -20,5 +21,11 @@ class Api::PostsController < ApplicationController
 	end
 
 	def destroy
+	end
+
+	private
+
+	def post_params
+		params.require(:post).permit(:name, :description)
 	end
 end
