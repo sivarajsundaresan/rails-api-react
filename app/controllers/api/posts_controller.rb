@@ -6,7 +6,7 @@ class Api::PostsController < ApplicationController
 	end
 	
 	def create
-		params["post"] = {name: "post3", description: "description3"}
+		params["post"] = {name: params["name"], description: params["description"]}
 		@post = Post.new(post_params)
 
 		if @post.save
