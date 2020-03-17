@@ -1,6 +1,6 @@
-class Api::PostsController < ApplicationController
+class Api::RegistrationsController < ApplicationController
 	skip_before_action :authenticate_request
-	
+
 	def create
 		user = User.create(email: params['user']['email'], password: params['user']['password'], password_confirmation: params['user']['password_confirmation'])
 		if user
