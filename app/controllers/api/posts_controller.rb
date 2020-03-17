@@ -6,15 +6,15 @@ class Api::PostsController < ApplicationController
 		@posts = Post.all
 		render json: @posts
 	end
+
 	
 	def create
-		params["post"] = {name: params["name"], description: params["description"]}
 		@post = Post.new(post_params)
 
 		if @post.save
-			render json: { status: true }, status: :ok
+			render json: @post, status: :created
 		else
-			render json: { status: false }, status: :error
+			render json: @post.errors, status: :error
 		end
 	end
 
@@ -22,16 +22,15 @@ class Api::PostsController < ApplicationController
 		if @post
 			render json: @post, status: :ok
 		else
-			render json: { status: false }, status: :unauthorized
+			render json: @post.errors, status: :unauthorized
 		end
 	end
 
 	def update
-		params["post"] = {name: params["name"], description: params["description"]}
 		if @post.update(post_params)
-			render json: { status: true }, status: :ok
+			render json: @post, status: :updated
 		else
-			render json: { status: false }, status: :ok
+			render json: @post.errors, status: :unauthorized
 		end
 	end
 
@@ -39,7 +38,7 @@ class Api::PostsController < ApplicationController
 		if @post.destroy
 			render json: { status: true }, status: :ok
 		else
-			render json: { status: false }, status: :ok
+			render json: { status: false }, status: :unauthorized
 		end
 	end
 
@@ -50,6 +49,6 @@ class Api::PostsController < ApplicationController
 	end
 
 	def set_post
-		@post = Post.find_by(id: params[:id])
+		@post = Post.find(params[:id])
 	end
 end

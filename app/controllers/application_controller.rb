@@ -1,3 +1,8 @@
 class ApplicationController < ActionController::API
-# skip_before_action :verify_authenticity_token
+ before_action :authentication_request
+
+ def authentication_request
+ 	@current_user = AuthorizeApiRequest.call(request.headers).result
+ 	render json: { error: 'Not Authorized' }, status: 401 unless @current_user
+ end
 end
