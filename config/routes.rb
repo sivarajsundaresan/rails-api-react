@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   
   #api
   namespace :api do
-  	resources :posts
+  	# resources :posts
+    post '/posts', to: 'posts#index'
   	post 'authenticate', to: 'authentication#authenticate'
   	# resources :sessions, only: [:create]
   	resources :registrations, only: [:create]
