@@ -12,10 +12,10 @@ class JsonWebToken
 			p Rails.application.secrets.secret_key_base
 			p JWT.decode(token, Rails.application.secrets.secret_key_base)
 			p 'jwt..............'
-			body = JWT.decode(token, Rails.application.secret_key_base)
+			body = JWT.decode(token, Rails.application.secrets.secret_key_base)
 			p "body"
 			p body
-			body = JWT.decode(token, Rails.application.secret_key_base)[0]
+			body = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
 			p body
 			HashWithIndifferentAccess.new body
 		rescue
