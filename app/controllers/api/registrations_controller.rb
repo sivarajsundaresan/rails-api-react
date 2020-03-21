@@ -10,7 +10,7 @@ class Api::RegistrationsController < ApplicationController
 				user: user
 			}
 		else
-			render json: { status: 500 }
+			render json: { status: 500, error: user.errors.messages }
 		end
 	end
 end
