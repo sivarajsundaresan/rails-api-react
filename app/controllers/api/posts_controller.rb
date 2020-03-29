@@ -54,6 +54,9 @@ class Api::PostsController < ApplicationController
 	end
 
 	def set_user
+		p "......current user id.........."
+		p @current_user.id
+		p "uuuuuuuuuuuuuuuuuuuuuuu"
 		@user = User.find(params[:user_id])
 	end
 end
