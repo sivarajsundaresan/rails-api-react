@@ -8,8 +8,8 @@ class JsonWebToken
 
 		def decode(token)
 			body = JWT.decode(token, Rails.application.secrets.secret_key_base)[0]
-			p "..............body................"
-			p body
+			p "..............body_user_id................"
+			@curent_user_id = body["user_id"]
 			HashWithIndifferentAccess.new body
 		rescue
 			nil
